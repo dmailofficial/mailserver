@@ -113,7 +113,7 @@ Api.endpoint('POST', '/mails/create',
                 port = 25,
                 starttls = false,
                 username = emailname,
-                password = "321456789",
+                password = "123456",
             })
             if err then
                 ngx.log(ngx.ERR, "mail.new error: ", err)
@@ -216,7 +216,7 @@ Api.endpoint('GET', '/mail/<inbox>/<status>',
         local some_mail = {
             host     = os.getenv("LUA_MAIL_HOST") or 'localhost';
             username = os.getenv("LUA_MAIL_USER") or  emailname;
-            password = os.getenv("LUA_MAIL_PASS") or '321456789';
+            password = os.getenv("LUA_MAIL_PASS") or '123456';
         }
 
         local maillist = {}
@@ -257,8 +257,7 @@ Api.endpoint('GET', '/user/<userlist>/<status>',
 
             local result = {}
 
-            local cmdd = "/usr/bin/java -jar /root/mailserver/james-server-jpa-guice-3.3.0/james-server-cli.jar -h 127.0.0.1 -p 9999 listusers 2>&1"
-            --local cmdd = 'cat /proc/sys/kernel/random/uuid'
+            local cmdd = 'cat /proc/sys/kernel/random/uuid'
             local ok, stdout, stderr, reason, status = shell.run(cmdd, stdin, timeout, max_size)
 
             if ok then
@@ -283,7 +282,6 @@ Api.endpoint('POST', '/createuser/<createuser>/<status>',
 
             local result = {}
 
-            local cmddaddu = "/usr/bin/java -jar /root/mailserver/james-server-jpa-guice-3.3.0/james-server-cli.jar -h 127.0.0.1 -p 9999 AddUser " .. emailname .. " 321456789 2>&1"
             --local cmdd = 'cat /proc/sys/kernel/random/uuid'
             local ok, stdout, stderr, reason, status = shell.run(cmddaddu, stdin, timeout, max_size)
 
